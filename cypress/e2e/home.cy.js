@@ -1,4 +1,4 @@
-// refrence cypress/support/commands.js
+///  <reference types="Cypress" />
 
 describe("landing page", () => {
  beforeEach(() => {
@@ -22,6 +22,7 @@ describe("landing page", () => {
 describe("Components", () => {
  beforeEach(() => {
   cy.visit("www.paypal.com");
+  cy.wait(1000);
  }),
   it("navBar is visible", () => {
    const navBar = cy.get(".pp-header__wrapper");
@@ -68,5 +69,21 @@ describe("Components", () => {
  it("shows login button", () => {
   const loginBtn = cy.get("#ul-btn");
   loginBtn.should("be.visible");
+ });
+
+ it("shows input field with Phone number as label", () => {
+  const inputField = cy.get("#text-input-Hero");
+  const labelText = cy.get(
+   '[class="pp-com-189dnc4-label-text_field_label_sm"]',
+  );
+  inputField.should("be.visible");
+  labelText.contains("Phone number");
+ });
+ it("shows an Agree button", () => {
+  const agreeBtn = cy.get(
+   ".app-download-group-phone-input-row > .app-download-group-cta-desktop-container > .app-download-group-cta-sms",
+  );
+  agreeBtn.should("be.visible");
+  agreeBtn.contains("Agree");
  });
 });
